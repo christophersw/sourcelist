@@ -1,8 +1,13 @@
 var express = require('express');
 var server = express();
-
-server.get('/hello.txt', function(req, res){
-  res.send('Hello World');
+ 
+var hbs = require('hbs');
+ 
+server.set('view engine', 'html');
+server.engine('html', hbs.__express);
+ 
+ server.get('/', function(req, res) {
+   res.render('index', {"test":"this is test text"});
 });
 
 server.listen(process.env.PORT);
